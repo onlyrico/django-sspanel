@@ -4,6 +4,8 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/ehco1996/django-sspanel/badge)](https://www.codefactor.io/repository/github/ehco1996/django-sspanel)
 [![simpleui](https://img.shields.io/badge/developing%20with-Simpleui-2077ff.svg)](https://github.com/newpanjing/simpleui)
+![check](https://github.com/Ehco1996/django-sspanel/actions/workflows/lint.yml/badge.svg)
+![code](https://github.com/Ehco1996/django-sspanel/actions/workflows/code.yml/badge.svg)
 
 * Telegram group : [invite link](https://t.me/Ehcobreakwa11)
 
@@ -62,7 +64,11 @@
 
 * 节点信息：
 
-![节点信息：](https://user-images.githubusercontent.com/24697284/106535019-424b5180-6530-11eb-90ea-46560b6d232d.png)
+![节点信息](https://user-images.githubusercontent.com/24697284/116970843-3e73ca80-aceb-11eb-8132-ca7b002c4b04.png)
+
+* 节点配置：
+
+![节点配置](https://user-images.githubusercontent.com/24697284/116970833-3ae04380-aceb-11eb-9e51-dff8f4b200cd.png)
 
 * 流量查询:
 
@@ -96,9 +102,9 @@
 我推荐 `Vultr` 家，最便宜的机房2.5美金一个月
 支持支付宝支付，对于新手来说，拿来练手最合适不过了
 
-这里有一个[推广链接](https://www.vultr.com/?ref=7914717-4F)
+这里有一个[推广链接](https://www.vultr.com/?ref=8376726-6G)
 
-通过这个链接注册，你能得到**50美元**的回赠！而我能得到25美元的回赠
+通过这个链接注册，你能得到**100美元**的回赠！而我能得到25美元的回赠
 
 详细教程请点：[安装文档](https://ehco1996.github.io/django-sspanel/)
 

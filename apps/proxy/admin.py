@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib import admin
 from django.forms import ModelForm
+from django.utils.html import format_html
 
 from apps.proxy import models
 from apps.sspanel.models import User
@@ -20,7 +21,14 @@ class RelayRuleInline(admin.TabularInline):
     model = models.RelayRule
     verbose_name = "中转规则配置"
     extra = 0
-    fields = ["proxy_node", "relay_node", "relay_port", "listen_type", "transport_type"]
+    fields = [
+        "rule_name",
+        "proxy_node",
+        "relay_node",
+        "relay_port",
+        "listen_type",
+        "transport_type",
+    ]
 
 
 class ProxyNodeAdminForm(ModelForm):
@@ -99,13 +107,17 @@ class RelayNodeAdmin(admin.ModelAdmin):
     inlines = [RelayRuleInline]
 
     def api_endpoint(self, instance):
-        return instance.api_endpoint
+        link = instance.api_endpoint
+        return format_html(f"<a href={link}>配置地址</a>")
 
     api_endpoint.short_description = "中转节点配置地址"
+    api_endpoint.allow_tags = True
+    api_endpoint.action_type = 2
 
 
 class RelayRuleAdmin(admin.ModelAdmin):
     list_display = [
+        "rule_name",
         "proxy_node",
         "relay_node",
         "relay_host",
@@ -118,22 +130,13 @@ class RelayRuleAdmin(admin.ModelAdmin):
     inlines = []
 
 
-class NodeOnlineLogAdmin(admin.ModelAdmin):
-    list_display = [
-        "proxy_node",
-        "online_user_count",
-        "tcp_connections_count",
-        "created_at",
-    ]
-    list_filter = ["proxy_node"]
-    list_select_related = ["proxy_node"]
-
-
 class UserTrafficLogAdmin(admin.ModelAdmin):
     list_display = [
         "username",
         "nodename",
         "total_traffic",
+        "tcp_conn_cnt",
+        "ip_list",
         "created_at",
     ]
     search_fields = ["user__username"]
@@ -155,23 +158,9 @@ class UserTrafficLogAdmin(admin.ModelAdmin):
     total_traffic.short_description = "流量"
 
 
-class UserOnLineIpLogAdmin(admin.ModelAdmin):
-    list_display = [
-        "user",
-        "proxy_node",
-        "ip",
-    ]
-    search_fields = ["ip"]
-    list_filter = ["user", "proxy_node"]
-    list_per_page = 10
-    show_full_result_count = False
-
-
 # Register your models here.
 admin.site.register(models.ProxyNode, ProxyNodeAdmin)
 admin.site.register(models.RelayNode, RelayNodeAdmin)
 admin.site.register(models.RelayRule, RelayRuleAdmin)
 
-admin.site.register(models.NodeOnlineLog, NodeOnlineLogAdmin)
 admin.site.register(models.UserTrafficLog, UserTrafficLogAdmin)
-admin.site.register(models.UserOnLineIpLog, UserOnLineIpLogAdmin)
